@@ -185,8 +185,7 @@ public class RefreshAction extends WorkspaceAction {
 	 * elements are not resources.
 	 */
 	protected boolean updateSelection(IStructuredSelection s) {
-		return (super.updateSelection(s) || s.isEmpty())
-				&& getSelectedNonResources().size() == 0;
+		return getSelectedNonResources().size() == 0;
 	}
 
 	/**
