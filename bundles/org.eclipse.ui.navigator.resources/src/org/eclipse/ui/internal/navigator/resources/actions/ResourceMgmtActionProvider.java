@@ -152,7 +152,7 @@ public class ResourceMgmtActionProvider extends CommonActionProvider {
 			buildAction.selectionChanged(selection);
 			menu.appendToGroup(ICommonMenuConstants.GROUP_BUILD, buildAction);
 		}
-		if (!hasClosedProjects) {
+		if (hasOpenProjects) {
 			refreshAction.selectionChanged(selection);
 			menu.appendToGroup(ICommonMenuConstants.GROUP_BUILD, refreshAction);
 		}
