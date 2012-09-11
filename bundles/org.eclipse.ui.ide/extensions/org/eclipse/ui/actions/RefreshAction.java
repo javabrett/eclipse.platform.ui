@@ -185,9 +185,20 @@ public class RefreshAction extends WorkspaceAction {
 	 * elements are not resources.
 	 */
 	protected boolean updateSelection(IStructuredSelection s) {
-		return getSelectedNonResources().size() == 0;
+		return (super.updateSelection(s) || s.isEmpty())
+				&& getSelectedNonResources().size() == 0;
 	}
 
+	/**
+	 * Overrides {@link WorkspaceAction#updateSelected(IResource)} so that {@link IProject}
+	 * instances are always considered refreshable.
+	 * 
+	 * @see org.eclipse.ui.actions.WorkspaceAction#updateSelected(org.eclipse.core.resources.IResource)
+	 */
+	protected boolean updateSelected(IResource resource) {
+		return (resource instanceof IProject || super.updateSelected(resource));
+	}
+	
 	/**
 	 * Handle the key release.
 	 * 
