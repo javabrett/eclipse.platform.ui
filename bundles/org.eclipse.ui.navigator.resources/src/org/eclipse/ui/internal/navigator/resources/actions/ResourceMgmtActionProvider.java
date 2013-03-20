@@ -7,6 +7,7 @@
  *
  * Contributors:
  *     IBM Corporation - initial API and implementation
+ *     Brett Randall <javabrett@gmail.com> - Bug 374017 https://bugs.eclipse.org/374017
  *******************************************************************************/
 
 package org.eclipse.ui.internal.navigator.resources.actions;
@@ -152,7 +153,7 @@ public class ResourceMgmtActionProvider extends CommonActionProvider {
 			buildAction.selectionChanged(selection);
 			menu.appendToGroup(ICommonMenuConstants.GROUP_BUILD, buildAction);
 		}
-		if (!hasClosedProjects) {
+		if (hasOpenProjects) {
 			refreshAction.selectionChanged(selection);
 			menu.appendToGroup(ICommonMenuConstants.GROUP_BUILD, refreshAction);
 		}

@@ -8,6 +8,7 @@
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *     Sebastian Davids <sdavids@gmx.de> - Images for menu items (27481)
+ *     Brett Randall <javabrett@gmail.com> - Bug 374017 https://bugs.eclipse.org/374017
  *******************************************************************************/
 package org.eclipse.ui.views.navigator;
 
@@ -142,7 +143,7 @@ public class WorkspaceActionGroup extends ResourceNavigatorActionGroup {
             buildAction.selectionChanged(selection);
             menu.add(buildAction);
         }
-        if (!hasClosedProjects) {
+        if (hasOpenProjects) {
             refreshAction.selectionChanged(selection);
             menu.add(refreshAction);
         }

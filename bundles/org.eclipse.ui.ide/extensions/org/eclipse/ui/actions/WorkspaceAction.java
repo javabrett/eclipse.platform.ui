@@ -7,6 +7,7 @@
  *
  * Contributors:
  *     IBM Corporation - initial API and implementation
+ *     Brett Randall <javabrett@gmail.com> - Bug 374017 https://bugs.eclipse.org/374017
  *******************************************************************************/
 package org.eclipse.ui.actions;
 
@@ -392,11 +393,28 @@ public abstract class WorkspaceAction extends SelectionListenerAction {
 		}
 		for (Iterator i = getSelectedResources().iterator(); i.hasNext();) {
 			IResource r = (IResource) i.next();
-			if (!r.isAccessible()) {
+			if (!updateSelected(r)) {
 				return false;
 			}
 		}
 		return true;
+	}
+
+	/**
+	 * Called by {@link #updateSelection(IStructuredSelection)} to test each
+	 * selected resource. If any resource returns false, the selection update
+	 * will result in a disabled action.
+	 *
+	 * This implementation returns true if a resource is accessible, otherwise
+	 * it returns false. Subclasses may override this behaviour with a more
+	 * specific resource test.
+	 *
+	 * @param resource
+	 * @return true if the current resource is selectable for this action
+	 * @since 3.8
+	 */
+	protected boolean updateSelected(IResource resource) {
+		return resource.isAccessible();
 	}
 
 	/**

@@ -7,6 +7,7 @@
  *
  * Contributors:
  *     IBM Corporation - initial API and implementation
+ *     Brett Randall <javabrett@gmail.com> - Bug 374017 https://bugs.eclipse.org/374017
  *******************************************************************************/
 package org.eclipse.ui.actions;
 
@@ -187,6 +188,16 @@ public class RefreshAction extends WorkspaceAction {
 	protected boolean updateSelection(IStructuredSelection s) {
 		return (super.updateSelection(s) || s.isEmpty())
 				&& getSelectedNonResources().size() == 0;
+	}
+
+	/**
+	 * Overrides {@link WorkspaceAction#updateSelected(IResource)} so that {@link IProject}
+	 * instances are always considered refreshable.
+	 *
+	 * @see org.eclipse.ui.actions.WorkspaceAction#updateSelected(org.eclipse.core.resources.IResource)
+	 */
+	protected boolean updateSelected(IResource resource) {
+		return (resource instanceof IProject || super.updateSelected(resource));
 	}
 
 	/**
